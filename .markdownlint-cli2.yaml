@@ -15,7 +15,3 @@ gitignore: true
 
 # Fix any fixable errors
 fix: false
-
-# Define glob expressions to ignore
-ignores:
-  - "testdata/**"
