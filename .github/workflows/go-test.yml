@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  golangci:
+  go-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,7 +25,9 @@ jobs:
 
       - name: Install dependencies
         run: go get .
+
       - name: Build
         run: go build -v ./...
+
       - name: Test
         run: go test -v ./... -cover
