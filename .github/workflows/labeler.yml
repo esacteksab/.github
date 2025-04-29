@@ -16,7 +16,7 @@ jobs:
       - name: Get PR type and add label
         run: |
           gh auth setup-git
-          PRTITLE="${{ github.event.pull_request.title }}"
+          PRTITLE='${{ github.event.pull_request.title }}'
           REGEX="\(([^)]+)\)"
           if [[ ${PRTITLE} =~ ${REGEX} ]]; then
             SCOPE="${BASH_REMATCH[1]}"
