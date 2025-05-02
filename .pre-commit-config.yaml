@@ -2,6 +2,10 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
+      - id: check-added-large-files
+        name: "Check Large Files"
+      - id: detect-private-key
+        name: "Detect Private Key"
       - id: trailing-whitespace
         name: "Trailing Whitespace"
         args:
@@ -11,15 +15,24 @@ repos:
         exclude: ^testdata/
       - id: check-json
         name: "Check JSON"
+      - id: check-toml
+        name: "Check TOML"
       - id: check-yaml
         name: "Check YAML"
       - id: check-merge-conflict
         name: "Check Merge Conflicts"
 
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.25.0
+    hooks:
+      - id: gitleaks
+        name: "Git Leaks"
+
   - repo: https://github.com/google/keep-sorted
     rev: v0.6.1
     hooks:
       - id: keep-sorted
+        name: "Keep Sorted"
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
     rev: 0.33.0
@@ -61,7 +74,7 @@ repos:
           - mdformat-footnote
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.31.1
+    rev: v1.32.0
     hooks:
       - id: typos
         args: [--force-exclude]
