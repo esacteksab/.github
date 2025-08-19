@@ -28,4 +28,4 @@ jobs:
           python-version: "3.12"
 
       - name: Pre-Commit
-        uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
+        uses: esacteksab/pre-commit-action@8c65b4bbac6ccff0e01baa6267776f5e03adab74 #v0.0.1
