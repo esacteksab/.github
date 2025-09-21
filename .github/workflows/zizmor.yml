@@ -1,10 +1,15 @@
+# yamllint disable rule:line-length
 name: GitHub Actions Security Analysis with zizmor 🌈
 
 on:
   push:
+    # yamllint disable-line rule:quoted-strings
     branches: ["main"]
   pull_request:
+    # yamllint disable-line rule:quoted-strings
     branches: ["**"]
+
+permissions: {}
 
 jobs:
   zizmor:
@@ -12,16 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
-      contents: read # only needed for private repos
-      actions: read # only needed for private repos
+      contents: read  # only needed for private repos
+      actions: read  # only needed for private repos
     steps:
       - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 #v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
         with:
           persist-credentials: false
 
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@b75a909f75acd358c2196fb9a5f1299a9a8868a4 #v6.7.0
+        uses: astral-sh/setup-uv@b75a909f75acd358c2196fb9a5f1299a9a8868a4  # v6.7.0
 
       - name: Run zizmor 🌈
         run: uvx zizmor --format=github .

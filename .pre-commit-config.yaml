@@ -3,60 +3,68 @@ repos:
     rev: v6.0.0
     hooks:
       - id: check-added-large-files
-        name: "Check Large Files"
+        name: Check Large Files
       - id: detect-private-key
-        name: "Detect Private Key"
+        name: Detect Private Key
       - id: trailing-whitespace
-        name: "Trailing Whitespace"
+        name: Trailing Whitespace
         args:
           - --markdown-linebreak-ext=md
       - id: end-of-file-fixer
-        name: "EOF Fixer"
+        name: EOF Fixer
         exclude: ^testdata/
       - id: check-json
-        name: "Check JSON"
+        name: Check JSON
       - id: check-toml
-        name: "Check TOML"
+        name: Check TOML
       - id: check-yaml
-        name: "Check YAML"
+        name: Check YAML
       - id: check-merge-conflict
-        name: "Check Merge Conflicts"
+        name: Check Merge Conflicts
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        name: YAML Lint
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.28.0
     hooks:
       - id: gitleaks
-        name: "Git Leaks"
+        name: Git Leaks
 
   - repo: https://github.com/google/keep-sorted
     rev: v0.7.1
     hooks:
       - id: keep-sorted
-        name: "Keep Sorted"
+        name: Keep Sorted
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.33.3
+    rev: 0.34.0
     hooks:
       - id: check-github-workflows
       - id: check-dependabot
       - id: check-jsonschema
-        name: "Validate Pre-Commit"
+        name: Validate Pre-Commit
         files: ^\.pre-commit-config.yaml+$
         types:
           - yaml
         args:
           [
-            "--schemafile",
+            --schemafile,
+            # yamllint disable-line rule:quoted-strings
             "https://json.schemastore.org/pre-commit-config.json",
           ]
       - id: check-jsonschema
-        name: "Validate MarkdownLint"
+        name: Validate MarkdownLint
         files: ^\.markdownlint-cli2.yaml+$
         types:
           - yaml
         args:
           [
-            "--schemafile",
+            --schemafile,
+            # yamllint disable-line rule:quoted-strings
             "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/v0.17.2/schema/markdownlint-cli2-config-schema.json",
           ]
 
@@ -65,7 +73,7 @@ repos:
     hooks:
       - id: mdformat
         exclude: ^testdata/
-        name: "Markdown Format"
+        name: Markdown Format
         additional_dependencies:
           - mdformat-gfm
           - mdformat-toc
@@ -78,22 +86,22 @@ repos:
     hooks:
       - id: typos
         args: [--force-exclude]
-        name: "Spell Check"
+        name: Spell Check
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:
       - id: shellcheck
-        name: "Shell Check"
+        name: Shell Check
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.18.1
     hooks:
       - id: markdownlint-cli2
-        name: "Markdown Lint"
+        name: Markdown Lint
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.12.1
+    rev: v1.13.0
     hooks:
       - id: zizmor
-        name: "Zizmor"
+        name: Zizmor

@@ -1,7 +1,10 @@
+# yamllint disable rule:line-length
 name: Labeler
 
 on:
   workflow_call:
+
+permissions: {}
 
 jobs:
   labeler:
@@ -12,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 #v5.0.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
         with:
           persist-credentials: false
 
@@ -26,13 +29,13 @@ jobs:
             TYPE="$(echo ${PRTITLE} | cut -d'(' -f1)"
           else
             TYPE="$(echo "${PRTITLE}" | cut -d':' -f1)"
-          fi
+            fi
 
           if [[ ${SCOPE} == "deps" ]]; then
             gh pr edit ${{ github.event.pull_request.number }} --add-label "type: ${TYPE},dependencies"
           else
             gh pr edit ${{ github.event.pull_request.number }} --add-label "type: ${TYPE}"
-          fi
+            fi
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
