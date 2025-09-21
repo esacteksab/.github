@@ -29,5 +29,11 @@ jobs:
           # yamllint disable-line rule:quoted-strings
           python-version: 3.12
 
+      - name: Set up Go
+        uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00  # v6.0.0
+        with:
+          go-version-file: go.mod
+          cache: true
+
       - name: Pre-Commit
         uses: esacteksab/pre-commit-action@4563f702b4348f0109ef6a450d90f917067815e3  # v0.1.0
