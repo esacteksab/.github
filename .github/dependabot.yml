@@ -9,6 +9,11 @@ updates:
           - patch
     schedule:
       interval: daily
+    cooldown:
+      default-days: 5
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
   - package-ecosystem: npm
     directory: /
     groups:
@@ -18,7 +23,17 @@ updates:
           - patch
     schedule:
       interval: daily
+    cooldown:
+      default-days: 5
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      default-days: 5
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
