@@ -12,7 +12,7 @@ permissions: {}
 
 jobs:
   golangci:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
