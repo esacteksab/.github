@@ -22,7 +22,10 @@ jobs:
           persist-credentials: false
 
       - name: Install yamllint
-        run: pip install yamllint
+        run: pip install yamllint==1.37.1
+
+      - name: Put yamllint on PATH
+        run: echo "/home/runner/.local/bin" >> $GITHUB_PATH
 
       - name: Lint YAML files
         run: yamllint .
