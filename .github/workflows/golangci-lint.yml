@@ -8,7 +8,7 @@ on:
         description: GolangCI version to install
         required: false
         type: string
-        default: 2.4.0
+        default: v2.4.0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
