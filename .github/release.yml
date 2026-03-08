@@ -1,0 +1,65 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-changelog
+
+  categories:
+    - title: ":warning: Update considerations and deprecations"
+      labels:
+        - "type: breaking"
+        - "type: deprecation"
+        - "type: regression"
+        - "type: revert"
+
+    - title: ":rocket: New features and improvements"
+      labels:
+        - "type: release"
+        - "type: feat"
+        - "type: enhancement"
+        - "type: refactor"
+        - "type: perf"
+
+    - title: ":lady_beetle: Bug fixes"
+      labels:
+        - "type: fix"
+
+    - title: ":nail_care: Style"
+      labels:
+        - "type: style"
+
+    - title: ":book: Documentation"
+      labels:
+        - "type: docs"
+
+    - title: ":test_tube: Test Dependency Upgrades"
+      labels:
+        - "type: test"
+
+    - title: ":dependabot: :link: Library Updates"
+      labels:
+        - go
+
+    - title: ":dependabot: :octocat: [Dev] GitHub Actions Dependency Upgrades"
+      labels:
+        - github_actions
+
+    - title: ":dependabot: :whale: [Dev] Docker Dependency Upgrades"
+      labels:
+        - docker
+
+    - title: ":dependabot: :clown_face: [Dev] Javascript Dependency Upgrades"
+      labels:
+        - npm
+
+    - title: ":dependabot: :snake: [Dev] Python Dependency Upgrades"
+      labels:
+        - python
+
+    - title: ":robot: [Dev] CI/Build Dependency Upgrades"
+      labels:
+        - "type: ci"
+        - "type: build"
+
+    - title: ":broom: General Housekeeping"
+      labels:
+        - "type: task"
