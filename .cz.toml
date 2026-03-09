@@ -1,6 +1,20 @@
 [tool.commitizen]
-name = "cz_conventional_commits"
+name = "cz_customize"
 tag_format = "v$version"
 version_scheme = "semver2"
-version_provider = "scm"
+version = "v0.80.0"
+# version_provider = "scm"
 major_version_zero = true
+bump_pattern = "^(feat|fix|refactor|perf|ci|chore)(\\(.+\\))?(!)?:"
+
+[tool.commitizen.bump_map]
+"BREAKING CHANGE" = "MAJOR"
+"feat" = "MINOR"
+"fix" = "PATCH"
+"refactor" = "PATCH"
+"perf" = "PATCH"
+"ci" = "PATCH"
+"chore" = "PATCH"
+
+[tool.commitizen.customize]
+schema_pattern = "^(feat|fix|refactor|perf|ci|chore)(\\(.+\\))?(!)?:(\\s.*)"
