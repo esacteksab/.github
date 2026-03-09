@@ -1,9 +1,9 @@
 [tool.commitizen]
 name = "cz_customize"
-version = "0.80.0"
 tag_format = "v$version"
 version_scheme = "semver2"
-version_provider = "scm"
+version = "v0.80.0"
+# version_provider = "scm"
 major_version_zero = true
 
 [tool.commitizen.customize]
