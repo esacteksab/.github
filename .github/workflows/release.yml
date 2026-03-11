@@ -29,7 +29,7 @@ jobs:
       - name: Get next version (dry run)
         id: version
         run: |
-          TAG=$(cz bump --dry-run --yes 2>&1 | grep "tag:" | awk '{print $2}')
+          TAG=$(cz bump --dry-run --yes |grep tag|awk '{print $NF}')
           if [ -z "$TAG" ]; then
             echo "No new tag generated. Check commit messages or Commitizen configuration."
             exit 1
