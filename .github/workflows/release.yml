@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to push tags and commits
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        with:
+          fetch-depth: 0  # Full history needed for cz to analyze commits
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+        with:
+          python-version: 3.12
+
+      - name: Install Commitizen
+        run: pip install -r requirements.txt
+
+      - name: Get next version (dry run)
+        id: version
+        run: |
+          TAG=$(cz bump --dry-run --yes 2>&1 | grep "tag:" | awk '{print $2}')
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Create and push tag
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git tag "$TAG"
+          git push --tags
+
+      - name: Create GitHub Release
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$TAG" \
+            --generate-notes \
+            --verify-tag \
+            --draft
