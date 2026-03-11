@@ -30,6 +30,11 @@ jobs:
         id: version
         run: |
           TAG=$(cz bump --dry-run --yes 2>&1 | grep "tag:" | awk '{print $2}')
+          if [ -z "$TAG" ]; then
+            echo "No new tag generated. Check commit messages or Commitizen configuration."
+            exit 1
+          fi
+          echo "$TAG"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
       - name: Create and push tag
