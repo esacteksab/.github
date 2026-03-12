@@ -55,6 +55,5 @@ jobs:
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "Tag $TAG already exists. Skipping tag creation."
           else
-            git tag "$TAG"
             gh release create "$TAG" --draft --generate-notes
           fi
