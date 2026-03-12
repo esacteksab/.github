@@ -47,24 +47,14 @@ jobs:
           echo "$TAG"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Create and push tag
+      - name: Verify tag and create draft release
         env:
           TAG: ${{ steps.version.outputs.tag }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "Tag $TAG already exists. Skipping tag creation."
           else
             git tag "$TAG"
-            git push --tags
+            gh release create "$TAG" --draft --generate-notes
           fi
-
-      - name: Create GitHub Release
-        env:
-          TAG: ${{ steps.version.outputs.tag }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "$TAG" \
-            --generate-notes \
-            --verify-tag \
-            --draft
