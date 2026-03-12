@@ -29,9 +29,9 @@ jobs:
       - name: Get next version (dry run)
         id: version
         run: |
-          TAG=$(cz bump --dry-run --yes |grep tag|awk '{print $NF}')
+          TAG=$(svu next --always --v0 --json | jq -r .version)
           if [ -z "$TAG" ]; then
-            echo "No new tag generated. Check commit messages or Commitizen configuration."
+            echo "No new tag generated. Check commit messages"
             exit 1
           fi
           echo "$TAG"
@@ -41,8 +41,12 @@ jobs:
         env:
           TAG: ${{ steps.version.outputs.tag }}
         run: |
-          git tag "$TAG"
-          git push --tags
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping tag creation."
+          else
+            git tag "$TAG"
+            git push --tags
+          fi
 
       - name: Create GitHub Release
         env:
