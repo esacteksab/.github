@@ -14,17 +14,27 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
-          fetch-depth: 0  # Full history needed for cz to analyze commits
+          fetch-depth: 0  # Full history needed for svu to analyze commits
           token: ${{ secrets.GITHUB_TOKEN }}
           persist-credentials: false
 
-      - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
+      - name: Set up Go
+        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417  # v6.3.0
         with:
-          python-version: 3.12
+          go-version: 1.25
 
-      - name: Install Commitizen
-        run: pip install -r requirements.txt
+      - name: Cache Go modules
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306  # v5.0.3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Install SVU
+        run: go install github.com/caarlos0/svu/v3@v3.4.0
 
       - name: Get next version (dry run)
         id: version
