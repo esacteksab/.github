@@ -15,27 +15,44 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
 
       - name: Get PR type and add label
         run: |
           gh auth setup-git
+
           PRTITLE="${PR_TITLE}"
           REGEX="\(([^)]+)\)"
+          SCOPE=""
           if [[ ${PRTITLE} =~ ${REGEX} ]]; then
             SCOPE="${BASH_REMATCH[1]}"
-            TYPE="$(echo ${PRTITLE} | cut -d'(' -f1)"
+            TYPE="$(echo "${PRTITLE}" | cut -d'(' -f1 | xargs)"
           else
-            TYPE="$(echo "${PRTITLE}" | cut -d':' -f1)"
+            TYPE="$(echo "${PRTITLE}" | cut -d':' -f1 | xargs)"
+          fi
+
+          if [[ "${SCOPE}" == "deps" ]]; then
+            LOWER_TITLE="$(echo "${PRTITLE}" | tr '[:upper:]' '[:lower:]')"
+            LABELS="dependencies"
+
+            if [[ "${LOWER_TITLE}" == *"github actions"* || "${LOWER_TITLE}" == *"github-actions"* ]]; then
+              LABELS="${LABELS},github_actions"
+            elif [[ "${LOWER_TITLE}" == *"npm"* || "${LOWER_TITLE}" == *"javascript"* || "${LOWER_TITLE}" == *"node"* ]]; then
+              LABELS="${LABELS},javascript,npm"
+            elif [[ "${LOWER_TITLE}" == *"pip"* || "${LOWER_TITLE}" == *"python"* ]]; then
+              LABELS="${LABELS},python"
+            elif [[ "${LOWER_TITLE}" == *"docker"* ]]; then
+              LABELS="${LABELS},docker"
+            elif [[ "${LOWER_TITLE}" == *"go"* ]]; then
+              LABELS="${LABELS},go"
             fi
 
-          if [[ ${SCOPE} == "deps" ]]; then
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "type: ${TYPE},dependencies"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "${LABELS}"
           else
             gh pr edit ${{ github.event.pull_request.number }} --add-label "type: ${TYPE}"
-            fi
+          fi
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

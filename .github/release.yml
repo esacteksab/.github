@@ -49,11 +49,16 @@ changelog:
 
     - title: ":dependabot: :clown_face: [Dev] Javascript Dependency Upgrades"
       labels:
+        - javascript
         - npm
 
     - title: ":dependabot: :snake: [Dev] Python Dependency Upgrades"
       labels:
         - python
+
+    - title: ":dependabot: Misc Dependency Updates"
+      labels:
+        - dependencies
 
     - title: ":robot: [Dev] CI/Build Dependency Upgrades"
       labels:
