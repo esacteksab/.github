@@ -2,6 +2,9 @@ version: 2
 updates:
   - package-ecosystem: pip
     directory: /
+    labels:
+      - dependencies
+      - python
     groups:
       py-minor-and-patch:
         update-types:
@@ -14,8 +17,13 @@ updates:
       semver-major-days: 30
       semver-minor-days: 7
       semver-patch-days: 3
+
   - package-ecosystem: npm
     directory: /
+    labels:
+      - dependencies
+      - javascript
+      - npm
     groups:
       npm-minor-and-patch:
         update-types:
@@ -28,8 +36,12 @@ updates:
       semver-major-days: 30
       semver-minor-days: 7
       semver-patch-days: 3
+
   - package-ecosystem: github-actions # zizmor: ignore[dependabot-cooldown]
     directory: /
+    labels:
+      - dependencies
+      - github_actions
     groups:
       gha-minor-and-patch:
         update-types:
