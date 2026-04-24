@@ -49,3 +49,21 @@ updates:
           - patch
     schedule:
       interval: daily
+
+  - package-ecosystem: pre-commit
+    directory: /
+    labels:
+      - dependencies
+      - dev
+    groups:
+      py-minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    schedule:
+      interval: daily
+    cooldown:
+      default-days: 5 # zizmor: ignore[dependabot-cooldown]
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
