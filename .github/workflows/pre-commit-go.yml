@@ -36,4 +36,4 @@ jobs:
           cache: true
 
       - name: Pre-Commit
-        uses: esacteksab/pre-commit-action@4563f702b4348f0109ef6a450d90f917067815e3  # v0.1.0
+        uses: esacteksab/pre-commit-action@dddf3846920dcf213a76a94dfbb4a74134f8d567  # v0.2.0
