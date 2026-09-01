@@ -5,18 +5,13 @@ updates:
     labels:
       - dependencies
       - python
-    groups:
-      py-minor-and-patch:
-        update-types:
-          - minor
-          - patch
     schedule:
       interval: daily
     cooldown:
-      default-days: 5 # zizmor: ignore[dependabot-cooldown]
+      default-days: 7
       semver-major-days: 30
-      semver-minor-days: 7
-      semver-patch-days: 3
+      semver-minor-days: 14
+      semver-patch-days: 7
 
   - package-ecosystem: npm
     directory: /
@@ -24,29 +19,19 @@ updates:
       - dependencies
       - javascript
       - npm
-    groups:
-      npm-minor-and-patch:
-        update-types:
-          - minor
-          - patch
     schedule:
       interval: daily
     cooldown:
-      default-days: 5 # zizmor: ignore[dependabot-cooldown]
+      default-days: 7
       semver-major-days: 30
-      semver-minor-days: 7
-      semver-patch-days: 3
+      semver-minor-days: 14
+      semver-patch-days: 7
 
   - package-ecosystem: github-actions # zizmor: ignore[dependabot-cooldown]
     directory: /
     labels:
       - dependencies
       - github_actions
-    groups:
-      gha-minor-and-patch:
-        update-types:
-          - minor
-          - patch
     schedule:
       interval: daily
 
@@ -55,10 +40,5 @@ updates:
     labels:
       - dependencies
       - dev
-    groups:
-      py-minor-and-patch:
-        update-types:
-          - minor
-          - patch
     schedule:
       interval: daily

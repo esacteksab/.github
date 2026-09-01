@@ -18,11 +18,12 @@ permissions: {}
 
 jobs:
   golangci:
+    name: golangci-lint
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
-      checks: write
+      pull-requests: read  # caller must grant; required to post annotations on PR diffs
+      checks: write  # caller must grant; required to post lint results as check runs
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1

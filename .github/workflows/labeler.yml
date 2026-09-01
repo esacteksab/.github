@@ -8,10 +8,11 @@ permissions: {}
 
 jobs:
   labeler:
+    name: Labeler
     runs-on: ubuntu-slim
     permissions:
       contents: read
-      pull-requests: write
+      pull-requests: write  # caller must grant; required to add labels to PRs
 
     steps:
       - name: Checkout Repository
@@ -49,11 +50,12 @@ jobs:
               LABELS="${LABELS},go"
             fi
 
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "${LABELS}"
+            gh pr edit "$PR_NUMBER" --add-label "${LABELS}"
           else
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "type: ${TYPE}"
+            gh pr edit "$PR_NUMBER" --add-label "type: ${TYPE}"
           fi
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}

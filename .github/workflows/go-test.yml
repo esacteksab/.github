@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   go-test:
+    name: Go - Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

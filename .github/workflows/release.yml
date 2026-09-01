@@ -9,8 +9,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write  # Required to push tags and commits
