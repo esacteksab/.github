@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   precommit:
+    name: Pre-Commit
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

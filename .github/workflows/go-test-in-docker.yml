@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   go-test-in-docker:
+    name: Go - Test In Docker
     runs-on: ubuntu-latest
     steps:
       - name: Setup Docker Buildx
@@ -25,5 +26,7 @@ jobs:
           tags: ${{ github.sha }}
 
       - name: Test
+        env:
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker run --rm ${{ github.sha }}
+          docker run --rm "$IMAGE_TAG"

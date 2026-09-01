@@ -26,10 +26,10 @@ jobs:
         # yamllint disable-line rule:quoted-strings
         language: ["actions"]
     permissions:
-      actions: read
+      actions: read  # required by CodeQL to query workflow runs
       contents: read
-      pull-requests: read
-      security-events: write
+      pull-requests: read  # required by CodeQL to read PR diff
+      security-events: write  # required to upload SARIF to the Security tab
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
