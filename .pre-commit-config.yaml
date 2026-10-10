@@ -72,7 +72,7 @@ repos:
     rev: 0.7.22
     hooks:
       - id: mdformat
-        exclude: ^testdata/
+        exclude: ^.github/
         name: Markdown Format
         additional_dependencies:
           - mdformat-gfm
