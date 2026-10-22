@@ -27,13 +27,19 @@ updates:
       semver-minor-days: 14
       semver-patch-days: 7
 
-  - package-ecosystem: github-actions # zizmor: ignore[dependabot-cooldown]
+  - package-ecosystem: github-actions
     directory: /
     labels:
       - dependencies
       - github_actions
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
+    groups:
+      codeql-actions:
+        patterns:
+          - github/codeql-action/*
 
   - package-ecosystem: pre-commit # zizmor: ignore[dependabot-cooldown]
     directory: /
